@@ -10,7 +10,11 @@
 CHIP DMux {
     IN in, sel;
     OUT a, b;
-
     PARTS:
-    //// Replace this comment with your code.
+
+Not(in = sel, out = selo );  
+And(a = selo, b = in, out = a);
+
+And(a = sel, b = in, out = b);
+
 }
