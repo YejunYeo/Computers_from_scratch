@@ -14,21 +14,14 @@ CHIP PC {
     OUT out[16];
     
     PARTS:
-Not16(in=in, out=nin);
-And16(a=in, b=nin, out=zeros);
-Inc16(in=in, out=outinc);
+    /*it is assumed that only 1 of reset, load or inc is true */
+Inc16(in=reg, out=increg);
 
-Register(in=outinc, load=true, out= outinct);
-Register(in = zeros, load = true, out=zerot);
-/* out(t+1) = in(t) and out(t+1) = out(t)*/
-Register(in=in, load=false, out=outt);
-Register(in=in, load=true, out=intt);
+Mux16(a=reg, b=increg, sel=inc, out=o1);
+Mux16(a=o1, b=in, sel=load, out=o2);
+Mux16(a=o2, b=false, sel=reset, out=o3);
 
-DMux4Way
-Mux16(a=outt,b=zerot, sel=reset,out=out1 );
-Mux16(a=outt,b=intt, sel=load, out=out2);
-Mux16(a=outt, b=outinct, sel=inc, out=out3);
-Mux16(a=outt, b=out, sel=true, out=out4);
+Register(in=o3, load=true, out=out, out=reg);
 
-§
+
 }
