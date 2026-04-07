@@ -7,4 +7,39 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 // The algorithm is based on repetitive addition.
 
-//// Replace this comment with your code.
+D=0
+
+(LOOP)
+
+@0
+D = M
+@STOP
+D;JEQ
+
+
+@1
+D = M
+
+@sum
+M = M + D;
+
+@0
+M = M-1
+D=M
+
+@LOOP
+D;JGE
+
+
+
+(STOP)
+@sum
+D = M
+@2
+M = D;
+
+(END)
+@END
+0;JMP
+
+
