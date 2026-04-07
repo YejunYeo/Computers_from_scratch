@@ -9,3 +9,78 @@
 // the screen should be cleared.
 
 //// Replace this comment with your code.
+
+(KEEP)
+@KBD
+D = M
+@counter
+M = 0
+@counter2
+M = 0
+
+@BLACKEN
+D;JNE
+
+@WHITEN
+D;JEQ
+
+(BLACKEN)
+(LOOP)
+
+@counter
+D = M
+
+@SCREEN
+A = D+A
+M = -1
+
+@counter
+M=M+1
+D = M
+
+@SCREEN
+A=D+A
+D = A
+
+@KBD
+D = A - D
+
+@LOOP
+D; JGT
+
+@KEEP
+0;JMP
+
+(WHITEN)
+(LOOP2)
+
+@counter2
+D = M
+
+@SCREEN
+A =D+A
+M = 0
+
+@counter2
+M=M+1
+D = M
+
+@SCREEN
+A=D+A
+D = A
+
+@KBD
+D = A - D
+
+@LOOP2
+D; JGT
+
+@KEEP
+0;JMP
+
+
+
+
+
+
+
